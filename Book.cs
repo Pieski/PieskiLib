@@ -59,12 +59,21 @@ namespace PieskiLib
         {
             MatchCollection tdinfos = Regex.Matches(html, "<td[\\s\\S]*?</td>");      //获取表格中储存的信息
             this.barcode = tdinfos[0].Value.Replace("<td>", "").Replace("</td>", "");
-            this.callcode = tdinfos[1].Value.Replace("<td>","").Replace("<font face='Courier'>", "").Replace("</font>", "").Replace("</td>","");
+            this.callcode = tdinfos[1].Value.Replace("<td>","").Replace("<fond face='Courier'>", "").Replace("<font face='Courier'>", "").Replace("</font>", "").Replace("</td>","");
             this.location = tdinfos[2].Value.Replace("<td>", "").Replace("</td>", "");
             this.state = tdinfos[3].Value.Replace("<td>", "").Replace("</td>", "");
-            this.publishNO = tdinfos[4].Value.Replace("<td>", "").Replace("</td>", "");
-            this.type = tdinfos[5].Value.Replace("<td>", "").Replace("</td>", "");
-            this.place = tdinfos[6].Value.Split('>')[1].Replace("</td", "");
+            if (state != "0")
+            {
+                this.publishNO = tdinfos[4].Value.Replace("<td>", "").Replace("</td>", "");
+                this.type = tdinfos[5].Value.Replace("<td>", "").Replace("</td>", "");
+                this.place = tdinfos[6].Value.Split('>')[1].Replace("</td", "").Replace("<script", "").Replace("&nbsp;", "");
+            }
+            else
+            {
+                this.state = "已借出，应还日期：" + tdinfos[5].Value.Split('>')[1].Replace("</td", "").Replace("<script", "").Replace("&nbsp;", "");
+                this.publishNO = tdinfos[3].Value.Replace("<td>", "").Replace("</td>", "");
+                this.type = tdinfos[4].Value.Replace("<td>", "").Replace("</td>", "");
+            }
         }
     }
 }
