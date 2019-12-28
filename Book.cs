@@ -32,6 +32,11 @@ namespace PieskiLib
             this.publisher = ori_publisher.Replace("出版者：", "").Replace("<", "");
         }
 
+        internal Book()
+        {
+
+        }
+
         internal void GetResources()
         {
             WebRequest request = new WebRequest(link);

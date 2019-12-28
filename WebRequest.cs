@@ -35,8 +35,6 @@ namespace PieskiLib
             dld_stream.Dispose();
             reader.Close();
             reader.Dispose();
-            response.Dispose();
-
             return html;
         }
     }
